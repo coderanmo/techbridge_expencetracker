@@ -26,13 +26,13 @@ Lazy loading and optimized component rendering
 Tech Stack
 
 Frontend: React 18+, React Router, Context API, Recharts, Tailwind CSS
-Backend: Node.js, Express.js,mongoDb, Sequelize ORM, Redis
+Backend: Node.js, Express.js,mongoDb, 
 Authentication: JWT
 
 Project Structure
 /client        Frontend (React)
 /server        Backend (Node.js, Express)
-/database      PostgreSQL configuration and migrations
+/database      mongoDb configuration and migrations
 
 Core Modules
 Authentication
@@ -47,6 +47,3 @@ Analytics
 
 Generates monthly trends, category distribution, and income vs expense charts.
 
-RBAC
-
-Ensures correct permissions for admin, user, and read-only roles.
