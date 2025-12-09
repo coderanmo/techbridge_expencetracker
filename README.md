@@ -26,7 +26,7 @@ Lazy loading and optimized component rendering
 Tech Stack
 
 Frontend: React 18+, React Router, Context API, Recharts, Tailwind CSS
-Backend: Node.js, Express.js, PostgreSQL, Sequelize ORM, Redis
+Backend: Node.js, Express.js,mongoDb, Sequelize ORM, Redis
 Authentication: JWT
 
 Project Structure
