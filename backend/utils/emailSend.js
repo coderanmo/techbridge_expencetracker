@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 const dataParserForItems = require("./dataParser");
 
 function generatePDF(data) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const doc = new PDFDocument({ margin: 30 });
     const chunks = [];
 
@@ -33,27 +33,30 @@ function generatePDF(data) {
       y += 25;
     });
 
-    doc.moveDown();
     doc.text(`Total: ₹${data.total}`, { align: "right" });
-
     doc.end();
   });
 }
 
 async function sendEmailWithAttachment(recipient, items) {
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
     auth: {
-      user: "anmolyadav95200@gmail.com",
-      pass: "uumfypboizrhhmgh",
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
     },
+    tls: {
+      rejectUnauthorized: false
+    }
   });
 
   const body = dataParserForItems(items);
   const pdfBuffer = await generatePDF(body);
 
   const mailOptions = {
-    from: "anmolyadav95200@gmail.com",
+    from: process.env.SMTP_USER,
     to: recipient,
     subject: "Expense Report for This Month",
     text: "Please find your expense report attached.",
@@ -69,7 +72,7 @@ async function sendEmailWithAttachment(recipient, items) {
     const info = await transporter.sendMail(mailOptions);
     console.log("Email sent:", info.response);
   } catch (error) {
-    console.error("Error sending email:", error);
+    console.error("MAIL ERROR:", error);
   }
 }
 
